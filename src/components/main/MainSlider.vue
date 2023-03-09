@@ -11,22 +11,22 @@
           <div class="nav-wrapper">
             <div class="slider-nav">
               <div class="slider-nav__item slider-nav__item_current">
-                <span class="slider-nav__progress"></span>
+                <span class="slider-nav__progress progress"></span>
                 <span class="slider-nav__position">01.</span>
                 <span class="slider-nav__title">Кванториум</span>
               </div>
               <div class="slider-nav__item">
-                <span class="slider-nav__progress"></span>
+                <span class="slider-nav__progress progress"></span>
                 <span class="slider-nav__position">02.</span>
                 <span class="slider-nav__title">Мобильный кванториум</span>
               </div>
               <div class="slider-nav__item">
-                <span class="slider-nav__progress"></span>
+                <span class="slider-nav__progress progress"></span>
                 <span class="slider-nav__position">03.</span>
                 <span class="slider-nav__title">Региональный центр одаренных детей</span>
               </div>
 <!--              <div class="slider-nav__item">-->
-<!--                <span class="slider-nav__progress"></span>-->
+<!--                <span class="slider-nav__progress progress"></span>-->
 <!--                <span class="slider-nav__position">04.</span>-->
 <!--                <span class="slider-nav__title">Региональный центр одаренных детей</span>-->
 <!--              </div>-->
@@ -55,6 +55,10 @@ export default {
 <style lang="sass" scoped>
 @import "~@/assets/main.sass"
 
+.slider
+  position: relative
+  padding-bottom: 274px
+
 .nav-wrapper
   display: flex
   align-items: flex-start
@@ -62,7 +66,7 @@ export default {
 .slider-info
   display: flex
   flex-direction: column
-  flex: 1 0 855px
+  max-width: 855px
   gap: 60px
   padding-top: 120px
 
@@ -119,9 +123,6 @@ export default {
     line-height: 170%
     color: $color-gray
   .slider-nav__progress
-    width: 100%
-    height: 3px
-    border-radius: 25px
     background-color: $color-light-gray
 
 .slider-nav__item_current
@@ -150,4 +151,11 @@ export default {
 .slider-switcher__item_next
   background-image: url("~@/assets/img/next-gray.svg")
 
+.slider_img
+  position: absolute
+  top: 0
+  left: auto
+  right: -251px
+  width: 796px
+  height: 1177px
 </style>

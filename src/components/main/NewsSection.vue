@@ -2,8 +2,8 @@
   <div class="news-wrapper">
     <div class="container">
       <div class="news">
-        <div class="news__header">
-          <h2 class="news-title">Новости</h2>
+        <div class="header-section">
+          <h2 class="title">Новости</h2>
           <a href="#" class="btn btn_news btn_sections">все новости</a>
         </div>
         <div class="news__content">
@@ -52,7 +52,7 @@
                 <span class="news__date">02 мая 2022</span>
               </div>
             </a>
-            <a href="#" class="news__item news-subscribe-block">
+            <div class="news__item news-subscribe-block">
               <div class="subscribe__info">
                 <h3 class="news__title">Подпишись, чтобы каждую неделю получать подборку свежих новостей!</h3>
                 <form class="news-subscribe-form">
@@ -63,7 +63,7 @@
                   </div>
                 </form>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>
@@ -82,12 +82,6 @@ export default {
 
 .news-wrapper
   background-color: #EFF0F6
-
-.news__header
-  display: flex
-  justify-content: space-between
-  align-items: center
-  margin-bottom: 60px
 
 .news
   padding: 100px 0
@@ -155,6 +149,7 @@ export default {
   position: relative
   background-color: $color-purple
   overflow: hidden
+  cursor: auto
   &:before
     content: ""
     position: absolute
@@ -197,6 +192,8 @@ export default {
       padding: 0 10px
       &::placeholder
         color: $color-light-gray
+      &:focus
+        outline: none
     .news-subscribe-form__submit
       color: $color-white
       width: 200px
