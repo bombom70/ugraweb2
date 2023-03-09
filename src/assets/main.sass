@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600;700;800;900&display=swap')
+
+$font-family: 'Montserrat'
+$text-color: #141C27
+$color-purple: #524FD5
+$color-gray: #97A5C1
+$color-white: #FFFFFF
+$color-blue: #524FD5
+$color-light-gray: #BEC7D8
+
+$h2-size: 75px
+$h2-font-weight: 200
+$h2-line-height: 91px
+
+$h3-size: 18px
+$h3-font-weight: 500
+$h3-line-height: 170%
+
+$btn-font-weight: 500
+$btn-font-size: 12px
+$btn-line-height: 15px
+
+*
+  margin: 0
+  padding: 0
+
+  color: $text-color
+
+  font-family: $font-family
+  font-weight: 500
+  font-size: 14px
+  font-style: normal
+
+body
+  overflow-x: hidden
+li
+  list-style: none
+
+.container
+  max-width: 1400px
+  margin: 0 auto
+
+.btn
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  padding: 25px 25px 25px 10px
+  border-radius: 45px
+  cursor: pointer
+  font-weight: $btn-font-weight
+  font-size: $btn-font-size
+  line-height: $btn-line-height
+  text-transform: uppercase
+  transition: 0.3s
+  &:before
+    content: ""
+    position: absolute
+    right: 50px
+    width: 13px
+    height: 16px
+    background-image: url("~@/assets/img/arrow-white.svg")
+    background-size: cover
+
+.btn_sections
+  justify-content: center
+  border: none
+  width: 240px
