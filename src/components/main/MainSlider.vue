@@ -5,9 +5,9 @@
         <div class="slider__item slider-info">
           <h1 class="title title_slider"><span class="title_slider__purple">Кванториум</span> – это школа мышления</h1>
           <p class="text-subtitle">Воспитываем поколение детей, способных обеспечить технологический прорыв!</p>
-          <button class="btn btn_slider">
+          <a href="#" class="btn btn_slider">
             подробнее
-          </button>
+          </a>
           <div class="nav-wrapper">
             <div class="slider-nav">
               <div class="slider-nav__item slider-nav__item_current">
@@ -83,7 +83,7 @@ export default {
   font-size: 25px
 
 .btn_slider
-  width: 226px
+  width: 200px
   color: $color-purple
   line-height: 15px
   background-color: white
@@ -118,11 +118,18 @@ export default {
     font-size: 15px
     line-height: 170%
     color: $color-gray
+  .slider-nav__progress
+    width: 100%
+    height: 3px
+    border-radius: 25px
+    background-color: $color-light-gray
 
 .slider-nav__item_current
   .slider-nav__position,
   .slider-nav__title
     color: #0A0061
+  .slider-nav__progress
+    background-color: $color-purple
 
 .slider-switcher
   display: flex
