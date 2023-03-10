@@ -1,26 +1,25 @@
 <template>
   <div class="menu-wrapper">
-    <ul class="menu">
-      <li class="menu-item">
-        <a class="menu-link">о центре</a>
-      </li>
-      <li class="menu-item">
-        <a class="menu-link">образовательные программы</a>
-      </li>
-      <li class="menu-item">
-        <a class="menu-link">новости</a>
-      </li>
-      <li class="menu-item">
-        <a class="menu-link">мероприятия и проекты</a>
-      </li>
-      <li class="menu-item">
-        <a class="menu-link">Летний отдых</a>
-      </li>
-      <li class="menu-item">
-        <a class="menu-link">Контакты</a>
-      </li>
-    </ul>
-    <div class="dop-menu">
+    <div class="menu">
+      <div
+          class="menu-item"
+          v-for="menu in menuList"
+          :key="menu.content.ID"
+      >
+        <a
+            @click="showMenu"
+            class="menu-link"
+        >{{menu.text}}</a>
+        <div class="sub-menu" :class="{ active: isShowMenu }">
+          <div class="container">
+            <div class="sub-menu-item" v-for="menuDop in menu.item" :key="menuDop.url">
+              {{menuDop.text}}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div v-if="!isShowMenu" class="dop-menu">
       <a href="/" class="vds">
         <img class="logos" src="~../../assets/img/search.svg"/>
       </a>
@@ -32,12 +31,33 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
-  name: "Menu"
+  name: "Menu",
+  data() {
+    return {
+      menuList: [],
+      isShowMenu: false,
+    }
+  },
+  methods: {
+    fetchMenuData() {
+      axios("https://rmc.uwdev.ru/api/header/menu").then(({data}) => this.menuList = data)
+    },
+    showMenu() {
+      this.isShowMenu = !this.isShowMenu;
+    }
+  },
+  created() {
+    this.fetchMenuData();
+    setTimeout(() => console.log(this.menuList), 2000);
+  }
 }
 </script>
 
 <style lang="sass" scoped>
+@import "~@/assets/main.sass"
+
 .menu
   display: flex
   gap: 52px
@@ -58,4 +78,18 @@ export default {
   gap: 40px
   justify-content: flex-end
 
+.sub-menu
+  display: none
+  position: fixed
+  width: 100vw
+  height: 100%
+  background-color: $color-white
+  left: 0
+  top: 121px
+  right: 0
+  bottom: 0
+  z-index: 10
+
+.active
+  display: block
 </style>

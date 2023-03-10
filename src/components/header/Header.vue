@@ -23,8 +23,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import "~@/assets/main.sass"
+
 .header
-   padding-top: 25px
+  position: fixed
+  width: 100%
+  padding-top: 25px
+  background-color: $color-white
+  z-index: 100
 
 .header-wrapper
   display: flex

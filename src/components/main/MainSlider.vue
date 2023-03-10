@@ -57,7 +57,7 @@ export default {
 
 .slider
   position: relative
-  padding-bottom: 274px
+  padding-bottom: 270px
 
 .nav-wrapper
   display: flex
@@ -68,7 +68,7 @@ export default {
   flex-direction: column
   max-width: 855px
   gap: 60px
-  padding-top: 120px
+  padding-top: 240px
 
 .title_slider
   font-weight: 900
@@ -153,7 +153,7 @@ export default {
 
 .slider_img
   position: absolute
-  top: 0
+  top: 121px
   left: auto
   right: -251px
   width: 796px
