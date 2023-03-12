@@ -10,10 +10,12 @@
             @click="showMenu"
             class="menu-link"
         >{{menu.text}}</a>
-        <div class="sub-menu" :class="{ active: isShowMenu }">
+        <div v-if="menu.item" class="menu-links">
           <div class="container">
-            <div class="sub-menu-item" v-for="menuDop in menu.item" :key="menuDop.url">
-              {{menuDop.text}}
+            <div>
+              <div class="sub-menu-item" v-for="menuDop in menu.item" :key="menuDop.url">
+                {{menuDop.text}}
+              </div>
             </div>
           </div>
         </div>
@@ -42,15 +44,16 @@ export default {
   },
   methods: {
     fetchMenuData() {
-      axios("https://rmc.uwdev.ru/api/header/menu").then(({data}) => this.menuList = data)
+      axios("https://rmc.uwdev.ru/api/header/menu").then(({data}) => this.menuList = data);
     },
-    showMenu() {
-      this.isShowMenu = !this.isShowMenu;
+    showMenu(e) {
+      console.log(e.target.nextElementSibling);
+      e.target.nextElementSibling.classList.toggle("active");
+      // this.isShowMenu = !this.isShowMenu;
     }
   },
   created() {
     this.fetchMenuData();
-    setTimeout(() => console.log(this.menuList), 2000);
   }
 }
 </script>
@@ -78,18 +81,22 @@ export default {
   gap: 40px
   justify-content: flex-end
 
-.sub-menu
-  display: none
+.menu-links
   position: fixed
   width: 100vw
-  height: 100%
+  height: auto
   background-color: $color-white
   left: 0
   top: 121px
   right: 0
   bottom: 0
   z-index: 10
+  transition: 0.3s
+  opacity: 0
+  pointer-events: none
 
 .active
-  display: block
+  opacity: 1
+  height: 100%
+  pointer-events: auto
 </style>
