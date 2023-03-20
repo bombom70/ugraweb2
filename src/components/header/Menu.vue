@@ -6,13 +6,18 @@
           v-for="menu in menuList"
           :key="menu.content.ID"
       >
-        <a
-            @click="showMenu"
+        <router-link
+            @click="showMenu(menu.content.ID)"
             class="menu-link"
-        >{{menu.text}}</a>
-        <div v-if="menu.item" class="menu-links">
+            :to="menu.item ? '#' : menu.url"
+        >{{menu.text}}</router-link>
+        <div
+            :id="menu.content.ID"
+            v-if="menu.item"
+            class="menu-links"
+        >
           <div class="container">
-            <div>
+            <div class="container-sub-links">
               <div class="sub-menu-item" v-for="menuDop in menu.item" :key="menuDop.url">
                 {{menuDop.text}}
               </div>
@@ -44,12 +49,19 @@ export default {
   },
   methods: {
     fetchMenuData() {
+      axios("https://rmc.uwdev.ru/api/header/menu").then(console.log)
       axios("https://rmc.uwdev.ru/api/header/menu").then(({data}) => this.menuList = data);
     },
-    showMenu(e) {
-      console.log(e.target.nextElementSibling);
-      e.target.nextElementSibling.classList.toggle("active");
-      // this.isShowMenu = !this.isShowMenu;
+    showMenu(id) {
+      const item = document.getElementById(id);
+      if (item.classList.contains('active')) {
+        item.classList.remove('active');
+        return;
+      }
+      const allActiveMenuItem = document.querySelectorAll(".active");
+      allActiveMenuItem.forEach(item => item.classList.remove("active"));
+      item.classList.add("active");
+      this.isShowMenu = !this.isShowMenu;
     }
   },
   created() {
@@ -99,4 +111,8 @@ export default {
   opacity: 1
   height: 100%
   pointer-events: auto
+
+.container-sub-links
+  padding-left: 340px
+
 </style>

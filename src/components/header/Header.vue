@@ -2,8 +2,13 @@
   <div class="header">
     <div class="container">
       <div class="header-wrapper">
-        <a href="/" class="header-link">
-          <img class="logos" src="~../../assets/img/logo.svg"/>
+        <a
+            v-for="icon in icons"
+            :key="icon"
+            :href= icon.url
+            class="header-link"
+        >
+          <div class="logo" v-html="icon.icon"></div>
         </a>
         <v-menu/>
       </div>
@@ -13,12 +18,25 @@
 
 <script>
 import Menu from "@/components/header/Menu.vue";
+import axios from "axios";
 export default {
   name: "Header",
   components: {
     "v-menu": Menu
+  },
+  data() {
+    return {
+      icons: [],
+    }
+  },
+  methods: {
+    fetchLogos() {
+      axios("https://rmc.uwdev.ru/api/header/logo").then(({ data }) => this.icons = data);
+    }
+  },
+  created() {
+    this.fetchLogos();
   }
-
 }
 </script>
 
@@ -38,4 +56,8 @@ export default {
 
 .wrapper-menu
   flex: 1 1 auto
+
+.logo
+  width: 92px
+  height: 96px
 </style>
