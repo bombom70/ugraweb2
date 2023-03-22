@@ -4,52 +4,33 @@
       <div class="news">
         <div class="header-section">
           <h2 class="title">Новости</h2>
-          <a href="#" class="btn btn_news btn_sections">все новости</a>
+          <router-link class="btn btn_news btn_sections" to="/news">все новости</router-link>
         </div>
         <div class="news__content">
-          <div class="large-news">
-            <a href="#" class="news__item">
+          <div class="news-list">
+            <a
+                class="news__item"
+                v-for="(newsItem, i) in getNews"
+                :href="newsItem.url"
+                :key="newsItem.url"
+                :class="small_"
+            >
               <div class="news__info">
-                <h3 class="news__title">VR-тренажер, фэнтези-настолка и карточная игра: Кванторианцы Югры представили проекты на фестивале «VR Fest Ugra»</h3>
-                <span class="news__date">04 мая 2022</span>
-                <p class="news__tags">#Радужный #VRтренажер #VRFestUg #Кванториум #Радужный #VRтренажер #VRFestUg</p>
+                <h3 class="news__title">{{newsItem.title}}</h3>
+                <span class="news__date">{{newsItem.date}}</span>
+                <div v-if="true" class="news__tags-wrapper">
+                  <a
+                      v-for="tag in newsItem.tags"
+                      :key="tag.url"
+                      :href="tag.url"
+                      class="news__tags"
+                  >
+                    {{tag.text}}
+                  </a>
+                </div>
               </div>
-              <div class="news-img-wrapper">
-                <img class="news__img" src="~@/assets/img/news1.png"/>
-              </div>
-            </a>
-            <a href="#" class="news__item">
-              <div class="news__info">
-                <h3 class="news__title">VR-тренажер, фэнтези-настолка и карточная игра: Кванторианцы Югры представили проекты на фестивале «VR Fest Ugra»</h3>
-                <span class="news__date">04 мая 2022</span>
-                <p class="news__tags">#Радужный #VRтренажер #VRFestUg #Кванториум #Радужный #VRтренажер #VRFestUg</p>
-              </div>
-              <div class="news-img-wrapper">
-                <img class="news__img" src="~@/assets/img/news2.png"/>
-              </div>
-            </a>
-            <a href="#" class="news__item">
-              <div class="news__info">
-                <h3 class="news__title">VR-тренажер, фэнтези-настолка и карточная игра: Кванторианцы Югры представили проекты на фестивале «VR Fest Ugra»</h3>
-                <span class="news__date">04 мая 2022</span>
-                <p class="news__tags">#Радужный #VRтренажер #VRFestUg #Кванториум #Радужный #VRтренажер #VRFestUg</p>
-              </div>
-              <div class="news-img-wrapper">
-                <img class="news__img" src="~@/assets/img/news3.png"/>
-              </div>
-            </a>
-          </div>
-          <div class="small-news">
-            <a href="#" class="news__item">
-              <div class="news__info">
-                <h3 class="news__title">В Югре проходит юбилейный 10-ый конкурс детского технологического творчества «Молодой изобретатель Югры»</h3>
-                <span class="news__date">02 мая 2022</span>
-              </div>
-            </a>
-            <a href="#" class="news__item">
-              <div class="news__info">
-                <h3 class="news__title">В Югре проходит юбилейный 10-ый конкурс детского технологического творчества «Молодой изобретатель Югры»</h3>
-                <span class="news__date">02 мая 2022</span>
+              <div v-if="i < 3" class="news-img-wrapper">
+                <img class="news__img" :src="newsItem.img?.url"/>
               </div>
             </a>
             <div class="news__item news-subscribe-block">
@@ -72,8 +53,21 @@
 </template>
 
 <script>
+import {mapActions, mapGetters} from "vuex";
+
 export default {
-  name: "NewsSection"
+  name: "NewsSection",
+  computed: {
+    ...mapGetters([
+      'getNews',
+    ])
+  },
+  methods: {
+    ...mapActions(["fetchNews"]),
+  },
+  created() {
+    this.fetchNews();
+  }
 }
 </script>
 
@@ -97,17 +91,18 @@ export default {
   &:hover
     background-color: $color-light-gray
 
-.large-news
-  margin-bottom: 30px
-
-.large-news,
-.small-news
+.news-list
   display: flex
   gap: 30px
+  flex-wrap: wrap
+  margin-bottom: 30px
 
 .news__item
-  display: block
-  max-width: 447px
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  max-width: 446px
+  max-height: 510px
   background-color: $color-white
   box-shadow: 0px 0px 25px rgba(113, 110, 219, 0.15)
   border-radius: 5px
@@ -115,6 +110,9 @@ export default {
   .news__info
     position: relative
     padding: 40px 40px 20px 40px
+    display: flex
+    flex-direction: column
+    gap: 10px
     &:before
       content: ""
       position: absolute
@@ -124,7 +122,7 @@ export default {
       left: 0
       top: 50px
   .news__title
-    margin-bottom: 20px
+    flex: 1 1 100px
     font-weight: $h3-font-weight
     font-size: $h3-size
     line-height: $h3-line-height
@@ -138,12 +136,12 @@ export default {
     line-height: 170%
     font-size: 13px
   .news-img-wrapper
-    position: relative
-    height: 17rem
+    height: 250px
+    padding-left: 40px
   .news__img
-    position: absolute
-    bottom: 0
-    right: 0
+    width: 100%
+    height: 100%
+    border-radius: 0 0 5px 0
 
 .news-subscribe-block
   position: relative

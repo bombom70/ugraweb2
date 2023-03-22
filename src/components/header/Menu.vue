@@ -49,7 +49,6 @@ export default {
   },
   methods: {
     fetchMenuData() {
-      axios("https://rmc.uwdev.ru/api/header/menu").then(console.log)
       axios("https://rmc.uwdev.ru/api/header/menu").then(({data}) => this.menuList = data);
     },
     showMenu(id) {

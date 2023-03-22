@@ -1,6 +1,7 @@
 <template>
   <div class="events-wrapper">
     <div class="container">
+      {{getEvents}}
       <div class="header-section">
         <h2 class="title events-title">События</h2>
         <div class="btns-wrapper">
@@ -10,22 +11,32 @@
       </div>
       <div class="content-section">
         <div class="carousel">
-          <a href="#" class="carousel__item bg_orange">
+          <a
+              v-for="(eventItem, i) in getEvents"
+              :key="eventItem.url"
+              :href="eventItem.url"
+              class="carousel__item bg_orange"
+              :class="{
+                bg_orange: i === 0,
+                bg_blue: i === 1,
+                bg_purple: i > 1,
+              }"
+          >
             <div class="carousel_decor">
               <h3 class="title carousel__title">
-                25
-                <span class="carousel__date">сен — 26 окт</span>
+                {{new Date(Date(eventItem.dateFirst)).getDate()}}
+                <span class="carousel__date">{{new Date(Date(eventItem.dateFirst)).toLocaleString('en-us',{month:'short'})}} — {{new Date(Date(eventItem.dateLast)).getDate()}} {{new Date(Date(eventItem.dateLast)).toLocaleString('en-us',{month:'short'})}}</span>
               </h3>
               <div class="carousel__content">
-                <p class="carousel__text">VR-тренажер, фэнтези-настолка и карточная игра: Кванторианцы Югры представили проекты на...</p>
+                <p class="carousel__text">{{ eventItem.title }}</p>
                 <div class="carousel__progress-view">
-                  <span class="place">онлайн</span>
+                  <span class="place">{{ eventItem.type }}</span>
                   <span class="carousel_progress progress"></span>
                 </div>
               </div>
             </div>
           </a>
-          <a href="#" class="carousel__item bg_blue">
+          <a href="#" class="carousel__item">
             <div class="carousel_decor">
               <h3 class="title carousel__title">
                 02
@@ -40,7 +51,7 @@
               </div>
             </div>
           </a>
-          <a href="#" class="carousel__item bg_purple">
+          <a href="#" class="carousel__item">
             <div class="carousel_decor">
               <h3 class="title carousel__title">
                 02
@@ -55,7 +66,7 @@
               </div>
             </div>
           </a>
-          <a href="#" class="carousel__item bg_purple">
+          <a href="#" class="carousel__item">
             <div class="carousel_decor">
               <h3 class="title carousel__title">
                 25
@@ -77,21 +88,25 @@
 </template>
 
 <script>
-import axios from "axios";
+import {mapActions, mapGetters} from "vuex";
 export default {
   name: "EventsSection",
   data() {
     return {
-      events: []
     }
+  },
+  computed: {
+    ...mapGetters([
+      "getEvents",
+    ]),
+
   },
   methods: {
-    fetchEventsData() {
-      axios("https://rmc.uwdev.ru/api/main/events").then(({ data }) => this.events = data.items)
-    }
+    ...mapActions(["fetchEvents"]),
   },
   created() {
-    this.fetchEventsData();
+    this.fetchEvents()
+        .finally();
   }
 }
 </script>

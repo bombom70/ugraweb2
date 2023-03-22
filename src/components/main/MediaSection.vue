@@ -41,8 +41,6 @@ export default {
   },
   methods: {
     fetchMediaData() {
-      axios("https://rmc.uwdev.ru/api/main/media").then(console.log)
-
       axios("https://rmc.uwdev.ru/api/main/media").then(({data}) => this.events = data)
           .finally(() => {
             this.events.map((e) => e.previewImg = `https://rmc.uwdev.ru/${e.previewImg}`);

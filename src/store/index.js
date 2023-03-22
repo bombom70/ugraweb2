@@ -1,9 +1,11 @@
 import { createStore } from 'vuex';
-import { newsModule } from "@/store/modules/newsModule";
+import { newsModule } from "./modules/newsModule";
+import {mainModule} from "./modules/mainModule";
 
 const store = createStore({
     modules:{
-        newsModule
+        newsModule,
+        mainModule
     }
 });
 
