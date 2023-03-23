@@ -8,7 +8,7 @@
       <div class="media-content">
         <div
             class="media-item"
-            v-for="(event, idx) in events"
+            v-for="(event, idx) in getMedia"
             :key="idx"
         >
           <h3 class="content__title" :class="{content__title_active: idx === 0}">new<span :class="{line_active: idx === 0}" class="line"></span></h3>
@@ -23,7 +23,7 @@
             </div>
           </div>
           <p class="media-text">{{ event.title }}</p>
-          <img :src="event.previewImg" class="preview_photo"/>
+          <img :src="url + event.previewImg" class="preview_photo"/>
         </div>
       </div>
     </div>
@@ -31,24 +31,26 @@
 </template>
 
 <script>
-import axios from "axios";
+import {mapActions, mapGetters} from "vuex";
+import { DOMAIN_URL } from "@/constants";
+
 export default {
   name: "MediaSection",
   data() {
     return {
-      events: []
+        url: DOMAIN_URL
     }
+  },
+  computed: {
+    ...mapGetters([
+      'getMedia',
+    ])
   },
   methods: {
-    fetchMediaData() {
-      axios("https://rmc.uwdev.ru/api/main/media").then(({data}) => this.events = data)
-          .finally(() => {
-            this.events.map((e) => e.previewImg = `https://rmc.uwdev.ru/${e.previewImg}`);
-          });
-    }
+    ...mapActions(["fetchMedia"]),
   },
   created() {
-    this.fetchMediaData();
+    this.fetchMedia();
   }
 }
 </script>

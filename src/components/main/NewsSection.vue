@@ -30,7 +30,7 @@
                 </div>
               </div>
               <div v-if="i < 3" class="news-img-wrapper">
-                <img class="news__img" :src="newsItem.img?.url"/>
+                <img class="news__img" :src="url+ newsItem.img.url"/>
               </div>
             </a>
             <div class="news__item news-subscribe-block">
@@ -54,9 +54,16 @@
 
 <script>
 import {mapActions, mapGetters} from "vuex";
+import { DOMAIN_URL } from "@/constants";
+
 
 export default {
   name: "NewsSection",
+  data() {
+    return {
+        url: DOMAIN_URL
+    }
+  },
   computed: {
     ...mapGetters([
       'getNews',
