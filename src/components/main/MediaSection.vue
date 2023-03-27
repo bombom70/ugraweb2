@@ -74,9 +74,11 @@ export default {
 
 .media-content
   display: flex
-  gap: 30px
+  justify-content: space-between
+  gap: 20px
   .media-item
-    max-width: 447px
+    max-width: 431px
+    flex: 1 1 auto
     height: 534px
     color: $color-white
 
@@ -93,7 +95,7 @@ export default {
   color: $color-gray
 
 .preview_photo
-  max-width: 447px
+  width: 100%
   border-radius: 5px
 
 .media-text

@@ -36,7 +36,7 @@
               </div>
             </div>
           </a>
-          <a href="#" class="carousel__item">
+          <a href="#" class="carousel__item bg_purple">
             <div class="carousel_decor">
               <h3 class="title carousel__title">
                 02
@@ -151,7 +151,8 @@ export default {
 
 .carousel
   display: flex
-  gap: 30px
+  justify-content: space-between
+  gap: 20px
   .carousel__item
     position: relative
     flex: 1 0 447px

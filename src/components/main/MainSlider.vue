@@ -47,8 +47,16 @@
 </template>
 
 <script>
+import {mapActions} from "vuex";
+
 export default {
-  name: "MainSlider"
+  name: "MainSlider",
+  methods: {
+    ...mapActions(["fetchSliders"]),
+  },
+  created() {
+    this.fetchSliders();
+  }
 }
 </script>
 

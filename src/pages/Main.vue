@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container-wrapper">
     <v-header/>
     <main-slider/>
     <news-section/>
@@ -36,6 +36,9 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="sass" scoped>
+
+.container-wrapper
+  overflow: hidden
 
 </style>

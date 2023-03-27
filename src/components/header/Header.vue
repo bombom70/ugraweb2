@@ -1,7 +1,7 @@
 <template>
-  <div class="header">
+  <div class="header-wrapper">
     <div class="container">
-      <div class="header-wrapper">
+      <div class="header">
         <a
             v-for="icon in icons"
             :key="icon"
@@ -43,14 +43,14 @@ export default {
 <style lang="sass" scoped>
 @import "~@/assets/main.sass"
 
-.header
+.header-wrapper
   position: fixed
   width: 100%
   padding-top: 25px
   background-color: $color-white
   z-index: 100
 
-.header-wrapper
+.header
   display: flex
   gap: 80px
 
@@ -58,6 +58,15 @@ export default {
   flex: 1 1 auto
 
 .logo
+  display: flex
+  justify-content: center
+  align-items: center
   width: 92px
   height: 96px
+
+@media (max-width: 1400px)
+  .logo
+    width: 80px
+    height: 80px
+
 </style>

@@ -100,7 +100,8 @@ export default {
 
 .news-list
   display: flex
-  gap: 30px
+  justify-content: space-between
+  gap: 20px
   flex-wrap: wrap
   margin-bottom: 30px
 
@@ -108,7 +109,7 @@ export default {
   display: flex
   flex-direction: column
   justify-content: space-between
-  max-width: 446px
+  max-width: 434px
   max-height: 510px
   background-color: $color-white
   box-shadow: 0px 0px 25px rgba(113, 110, 219, 0.15)
