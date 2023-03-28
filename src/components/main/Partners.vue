@@ -45,16 +45,17 @@ export default {
 @import "~@/assets/main.sass"
 
 .partners-wrapper
-    padding: 100px 0 200px 0
+  padding: 100px 0 200px 0
 
 .partners
-    display: flex
-    gap: 100px
+  display: flex
+  gap: 92px
+  overflow: hidden
 
 .partners__item
-    flex: 1 1 200px
-    height: 200px
+  flex: 1 1 200px
+  height: 200px
 
 .partners__img
-    height: 200px
+  height: 200px
 </style>
