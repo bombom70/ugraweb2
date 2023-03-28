@@ -10,10 +10,10 @@ export const sliderModule = {
         },
     },
     actions: {
-        fetchSliders() {
+        fetchSliders({ commit }) {
             axios("https://rmc.uwdev.ru/api/main/slider")
-                .then(console.log)
-                // .then(({data}) => commit("addSliders", data));
+                // .then(console.log)
+                .then(({data}) => commit("addSliders", data));
         },
     },
     getters: {

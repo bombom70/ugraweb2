@@ -1,7 +1,6 @@
 <template>
   <div class="events-wrapper">
     <div class="container">
-      {{getEvents}}
       <div class="header-section">
         <h2 class="title events-title">События</h2>
         <div class="btns-wrapper">

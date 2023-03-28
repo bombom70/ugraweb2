@@ -45,6 +45,7 @@ export default {
 
 .header-wrapper
   position: fixed
+  flex: 0 1 auto
   width: 100%
   padding-top: 25px
   background-color: $color-white

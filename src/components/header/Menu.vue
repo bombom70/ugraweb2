@@ -9,6 +9,7 @@
         <router-link
             @click="showMenu(menu.content.ID)"
             class="menu-link"
+            :class="{active: menu.text === }"
             :to="menu.item ? '#' : menu.url"
         >{{menu.text}}</router-link>
         <div

@@ -105,6 +105,7 @@ export default {
 
 .footer-wrapper
   position: relative
+  flex: 0 1 auto
   padding-top: 80px
   padding-bottom: 50px
   background-color: #141C27
