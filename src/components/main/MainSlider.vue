@@ -8,38 +8,33 @@
           <a href="#" class="btn btn_slider">
             подробнее
           </a>
-          <div class="nav-wrapper">
-            <div class="slider-nav">
-              <div class="slider-nav__item slider-nav__item_current">
-                <span class="slider-nav__progress progress"></span>
-                <span class="slider-nav__position">01.</span>
-                <span class="slider-nav__title">Кванториум</span>
-              </div>
-              <div class="slider-nav__item">
-                <span class="slider-nav__progress progress"></span>
-                <span class="slider-nav__position">02.</span>
-                <span class="slider-nav__title">Мобильный кванториум</span>
-              </div>
-              <div class="slider-nav__item">
-                <span class="slider-nav__progress progress"></span>
-                <span class="slider-nav__position">03.</span>
-                <span class="slider-nav__title">Региональный центр одаренных детей</span>
-              </div>
-<!--              <div class="slider-nav__item">-->
-<!--                <span class="slider-nav__progress progress"></span>-->
-<!--                <span class="slider-nav__position">04.</span>-->
-<!--                <span class="slider-nav__title">Региональный центр одаренных детей</span>-->
-<!--              </div>-->
-            </div>
-            <div class="slider-switcher">
-              <button class="slider-switcher__item slider-switcher__item_prev"></button>
-              <span class="slider-switcher__count">01 / 04</span>
-              <button class="slider-switcher__item slider-switcher__item_next"></button>
-            </div>
+          <div class="slider__item slider_img">
+            <img src="~@/assets/img/slider.svg"/>
           </div>
         </div>
-        <div class="slider__item slider_img">
-          <img src="~@/assets/img/slider.svg"/>
+        <div class="nav-wrapper">
+          <div class="slider-nav">
+            <div class="slider-nav__item slider-nav__item_current">
+              <span class="slider-nav__progress progress"></span>
+              <span class="slider-nav__position">01.</span>
+              <span class="slider-nav__title">Кванториум</span>
+            </div>
+            <div class="slider-nav__item">
+              <span class="slider-nav__progress progress"></span>
+              <span class="slider-nav__position">02.</span>
+              <span class="slider-nav__title">Мобильный кванториум</span>
+            </div>
+            <div class="slider-nav__item">
+              <span class="slider-nav__progress progress"></span>
+              <span class="slider-nav__position">03.</span>
+              <span class="slider-nav__title">Региональный центр одаренных детей</span>
+            </div>
+          </div>
+          <div class="slider-switcher">
+            <button class="slider-switcher__item slider-switcher__item_prev"></button>
+            <span class="slider-switcher__count">01 / 04</span>
+            <button class="slider-switcher__item slider-switcher__item_next"></button>
+          </div>
         </div>
       </div>
     </div>
@@ -47,10 +42,13 @@
 </template>
 
 <script>
-import {mapActions} from "vuex";
+import {mapActions, mapGetters} from "vuex";
 
 export default {
   name: "MainSlider",
+  computed: {
+    ...mapGetters(["getSliders"]),
+  },
   methods: {
     ...mapActions(["fetchSliders"]),
   },
@@ -68,8 +66,9 @@ export default {
   padding-bottom: 270px
 
 .nav-wrapper
-  display: flex
-  align-items: flex-start
+  position: relative
+  max-width: 800px
+  margin-top: 105px
 
 .slider-info
   display: flex
@@ -108,9 +107,6 @@ export default {
   &:before
     background-image: url("~@/assets/img/arrows.svg")
 
-.slider
-  display: flex
-
 .slider-nav
   display: flex
   gap: 50px
@@ -141,6 +137,9 @@ export default {
     background-color: $color-purple
 
 .slider-switcher
+  position: absolute
+  top: -10px
+  right: 0
   display: flex
   align-items: center
   gap: 10px

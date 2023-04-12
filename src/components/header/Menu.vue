@@ -7,11 +7,15 @@
           :key="menu.content.ID"
       >
         <router-link
-            @click="showMenu(menu.content.ID)"
+            v-if="!menu.item"
             class="menu-link"
-            :class="{active: menu.text === }"
-            :to="menu.item ? '#' : menu.url"
+            :to="menu.url"
         >{{menu.text}}</router-link>
+        <span
+            class="menu-link"
+            v-else-if="menu.item"
+            @click="showMenu(menu.content.ID)"
+        >{{menu.text}}</span>
         <div
             :id="menu.content.ID"
             v-if="menu.item"
@@ -44,6 +48,7 @@ export default {
   name: "Menu",
   data() {
     return {
+      currentPage: window.location,
       menuList: [],
       isShowMenu: false,
     }
@@ -87,6 +92,10 @@ export default {
   &:hover
     padding-bottom: 5px
     border-bottom: 3px solid #524fd5
+
+.router-link-active
+  padding-bottom: 5px
+  border-bottom: 3px solid #524fd5
 
 .dop-menu
   display: flex

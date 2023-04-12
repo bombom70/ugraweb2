@@ -1,5 +1,6 @@
 <template>
   <div class="events-wrapper">
+    {{getEvents}}
     <div class="container">
       <div class="header-section">
         <h2 class="title events-title">События</h2>
@@ -10,76 +11,38 @@
       </div>
       <div class="content-section">
         <div class="carousel">
-          <a
-              v-for="(eventItem, i) in getEvents"
-              :key="eventItem.url"
-              :href="eventItem.url"
-              class="carousel__item bg_orange"
-              :class="{
-                bg_orange: i === 0,
-                bg_blue: i === 1,
-                bg_purple: i > 1,
-              }"
-          >
-            <div class="carousel_decor">
-              <h3 class="title carousel__title">
-                {{new Date(Date(eventItem.dateFirst)).getDate()}}
-                <span class="carousel__date">{{new Date(Date(eventItem.dateFirst)).toLocaleString('en-us',{month:'short'})}} — {{new Date(Date(eventItem.dateLast)).getDate()}} {{new Date(Date(eventItem.dateLast)).toLocaleString('en-us',{month:'short'})}}</span>
-              </h3>
-              <div class="carousel__content">
-                <p class="carousel__text">{{ eventItem.title }}</p>
-                <div class="carousel__progress-view">
-                  <span class="place">{{ eventItem.type }}</span>
-                  <span class="carousel_progress progress"></span>
+          <a class="switch switch_prev" @click="carouselPrev"></a>
+          <div class="carousel__content-line">
+            <div class="carousel__line">
+              <a
+                  v-for="(eventItem, i) in [...getEvents, ...getEvents]"
+                  :key="eventItem.url"
+                  :href="eventItem.url"
+                  class="carousel__item bg_orange"
+                  :class="{
+                  bg_orange: i === 0,
+                  bg_blue: i === 1,
+                  bg_purple: i > 1,
+                  hideSlide: i > 2
+                }"
+              >
+                <div class="carousel_decor">
+                  <h3 class="title carousel__title">
+                    {{new Date(Date(eventItem.dateFirst)).getDate()}}
+                    <span class="carousel__date">{{new Date(Date(eventItem.dateFirst)).toLocaleString('en-us',{month:'short'})}} — {{new Date(Date(eventItem.dateLast)).getDate()}} {{new Date(Date(eventItem.dateLast)).toLocaleString('en-us',{month:'short'})}}</span>
+                  </h3>
+                  <div class="carousel__content">
+                    <p class="carousel__text">{{ eventItem.title }}</p>
+                    <div class="carousel__progress-view">
+                      <span class="place">{{ eventItem.type }}</span>
+                      <span class="carousel_progress progress"></span>
+                    </div>
+                  </div>
                 </div>
-              </div>
+              </a>
             </div>
-          </a>
-          <a href="#" class="carousel__item bg_purple">
-            <div class="carousel_decor">
-              <h3 class="title carousel__title">
-                02
-                <span class="carousel__date">июля</span>
-              </h3>
-              <div class="carousel__content">
-                <p class="carousel__text">VR-тренажер, фэнтези-настолка и карточная игра</p>
-                <div class="carousel__progress-view">
-                  <span class="place">семинар</span>
-                  <span class="carousel_progress progress"></span>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="#" class="carousel__item">
-            <div class="carousel_decor">
-              <h3 class="title carousel__title">
-                02
-                <span class="carousel__date">июля</span>
-              </h3>
-              <div class="carousel__content">
-                <p class="carousel__text">VR-тренажер, фэнтези-настолка и карточная игра</p>
-                <div class="carousel__progress-view">
-                  <span class="place">офлайн</span>
-                  <span class="carousel_progress progress"></span>
-                </div>
-              </div>
-            </div>
-          </a>
-          <a href="#" class="carousel__item">
-            <div class="carousel_decor">
-              <h3 class="title carousel__title">
-                25
-                <span class="carousel__date">сен — 26 окт</span>
-              </h3>
-              <div class="carousel__content">
-                <p class="carousel__text">VR-тренажер, фэнтези-настолка и карточная игра: Кванторианцы Югры представили проекты на...</p>
-                <div class="carousel__progress-view">
-                  <span class="place">онлайн</span>
-                  <span class="carousel_progress progress"></span>
-                </div>
-              </div>
-            </div>
-          </a>
+          </div>
+          <a class="switch switch_next" @click="carouselNext"></a>
         </div>
       </div>
     </div>
@@ -92,6 +55,10 @@ export default {
   name: "EventsSection",
   data() {
     return {
+      sliderState: {
+        position: 0,
+        currentItem: 0,
+      }
     }
   },
   computed: {
@@ -102,6 +69,22 @@ export default {
   },
   methods: {
     ...mapActions(["fetchEvents"]),
+    carouselPrev() {
+      const line = document.querySelector(".carousel__line");
+      this.sliderState.position += 467;
+      this.sliderState.currentItem -= 1;
+
+      line.style.transform = `translate(${this.sliderState.position}px)`;
+      line.style.transitionDuration = "0.5s";
+    },
+    carouselNext() {
+      const line = document.querySelector(".carousel__line");
+      this.sliderState.position -= 467;
+      this.sliderState.currentItem += 1;
+
+      line.style.transform = `translate(${this.sliderState.position}px)`;
+      line.style.transitionDuration = "0.5s";
+    },
   },
   created() {
     this.fetchEvents()
@@ -149,6 +132,10 @@ export default {
   text-align: start
 
 .carousel
+  position: relative
+
+.carousel__line
+  position: relative
   display: flex
   justify-content: space-between
   gap: 20px
@@ -281,4 +268,27 @@ export default {
       font-weight: 700
     .carousel_progress
       background-color: $color-white
+
+.switch
+  display: block
+  position: absolute
+  top: 43%
+  width: 40px
+  height: 40px
+  background-image: url("@/assets/img/arrow-events.svg")
+  background-repeat: no-repeat
+  background-position: center center
+  background-size: contain
+  cursor: pointer
+  z-index: 10
+
+.switch_prev
+  left: -80px
+
+.switch_next
+  right: -80px
+  transform: rotate(180deg)
+
+.hideSlide
+  opacity: 0.5
 </style>
