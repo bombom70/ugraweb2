@@ -1,24 +1,33 @@
 import axios from "axios";
 
-export const newsModule = {
+export const newsPageModule = {
     state: {
-        news: [],
+        data: [],
     },
     mutations: {
-        addNews(state, payload) {
-            state.news = payload;
+        addData(state, payload) {
+            state.data = payload;
         }
 
     },
     actions: {
-        fetchNews({ commit }) {
+        fetchAllNews({ commit }) {
             axios("https://rmc.uwdev.ru/api/news")
-                .then(({data}) => commit("addNews", data));
+                .then(({data}) => commit("addData", data));
         },
     },
     getters: {
-        getNews(state) {
-            return state.news;
+        getAllNews(state) {
+            return state.data.content;
+        },
+        getCategory(state) {
+            return state.data.category;
+        },
+        getMeta(state) {
+            return state.data.meta;
+        },
+        getPageNavigation(state) {
+            return state.data.pageNav;
         },
     },
 }

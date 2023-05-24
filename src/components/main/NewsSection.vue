@@ -8,31 +8,15 @@
         </div>
         <div class="news__content">
           <div class="news-list">
-            <a
-                class="news__item"
+            <newsCard
                 v-for="(newsItem, i) in getNews"
-                :href="newsItem.url"
+                :link="newsItem.url"
                 :key="newsItem.url"
-                :class="small_"
-            >
-              <div class="news__info">
-                <h3 class="news__title">{{newsItem.title}}</h3>
-                <span class="news__date">{{newsItem.date}}</span>
-                <div v-if="true" class="news__tags-wrapper">
-                  <a
-                      v-for="tag in newsItem.tags"
-                      :key="tag.url"
-                      :href="tag.url"
-                      class="news__tags"
-                  >
-                    {{tag.text}}
-                  </a>
-                </div>
-              </div>
-              <div v-if="i < 3" class="news-img-wrapper">
-                <img class="news__img" :src="url+ newsItem.img.url"/>
-              </div>
-            </a>
+                :title="newsItem.title"
+                :date="newsItem.date"
+                :tags="newsItem.tags"
+                :imgUrl="i < 3 ? url+newsItem.img.url : ''"
+            />
             <div class="news__item news-subscribe-block">
               <div class="subscribe__info">
                 <h3 class="news__title">Подпишись, чтобы каждую неделю получать подборку свежих новостей!</h3>
@@ -55,10 +39,11 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import { DOMAIN_URL } from "@/constants";
-
+import newsCard from "@/components/newsCard/NewsCard.vue"
 
 export default {
   name: "NewsSection",
+  components: {newsCard},
   data() {
     return {
         url: DOMAIN_URL
@@ -102,7 +87,6 @@ export default {
 
 .news-list
   display: flex
-  justify-content: space-between
   gap: 20px
   flex-wrap: wrap
   margin-bottom: 30px
@@ -111,6 +95,7 @@ export default {
   display: flex
   flex-direction: column
   justify-content: space-between
+  flex: 1 1 auto
   max-width: 434px
   max-height: 510px
   background-color: $color-white
@@ -152,6 +137,7 @@ export default {
     width: 100%
     height: 100%
     border-radius: 0 0 5px 0
+    object-fit: cover
 
 .news-subscribe-block
   position: relative

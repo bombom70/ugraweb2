@@ -3,10 +3,10 @@ import axios from "axios";
 export const newsModule = {
     state: {
         news: [],
-        events: []
     },
     mutations: {
         addNews(state, payload) {
+            console.log(payload);
             state.news = payload;
         },
     },
