@@ -15,6 +15,10 @@ export const newsPageModule = {
             axios("https://rmc.uwdev.ru/api/news")
                 .then(({data}) => commit("addData", data));
         },
+        fetchNewsToTag({ commit }, tag) {
+            axios(`https://rmc.uwdev.ru/api/news?tag=${tag}`)
+                .then(({data}) => commit("addData", data));
+        },
     },
     getters: {
         getAllNews(state) {

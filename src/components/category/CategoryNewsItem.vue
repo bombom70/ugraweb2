@@ -1,15 +1,22 @@
 <template>
-  <a class="category__item">
+  <a class="category__item" @click="getContentTotag">
     {{ name }}
   </a>
 </template>
 
 <script>
+import {mapActions} from "vuex";
 export default {
   name: "CategoryNewsItem",
   props: {
     name: String
-  }
+  },
+  methods: {
+    ...mapActions(["fetchNewsToTag"]),
+    getContentTotag() {
+      this.fetchNewsToTag(this.name)
+    }
+  },
 }
 </script>
 
