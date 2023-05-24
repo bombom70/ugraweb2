@@ -18,8 +18,9 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import "~@/assets/main.sass"
+<style lang="sass">
+@import "~@/assets/styles/main.sass"
+
 .App
   display: flex
   flex-direction: column

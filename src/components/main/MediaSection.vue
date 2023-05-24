@@ -55,8 +55,9 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import "~@/assets/main.sass"
+<style lang="sass">
+@import "~@/assets/styles/main.sass"
+
 .media-wrapper
   padding: 100px 0
   background-color: #141C27

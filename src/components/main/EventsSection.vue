@@ -1,6 +1,5 @@
 <template>
   <div class="events-wrapper">
-    {{getEvents}}
     <div class="container">
       <div class="header-section">
         <h2 class="title events-title">События</h2>
@@ -15,15 +14,15 @@
           <div class="carousel__content-line">
             <div class="carousel__line">
               <a
-                  v-for="(eventItem, i) in [...getEvents, ...getEvents]"
+                  v-for="(eventItem, i) in getEvents"
                   :key="eventItem.url"
+                  :id="eventItem.url"
                   :href="eventItem.url"
-                  class="carousel__item bg_orange"
+                  class="carousel__item bg_orange hideSlide"
                   :class="{
                   bg_orange: i === 0,
                   bg_blue: i === 1,
                   bg_purple: i > 1,
-                  hideSlide: i > 2
                 }"
               >
                 <div class="carousel_decor">
@@ -57,22 +56,28 @@ export default {
     return {
       sliderState: {
         position: 0,
-        currentItem: 0,
-      }
+        currentItemID: 1,
+        currentItemUrl: null,
+      },
     }
   },
   computed: {
     ...mapGetters([
       "getEvents",
     ]),
-
   },
   methods: {
     ...mapActions(["fetchEvents"]),
     carouselPrev() {
       const line = document.querySelector(".carousel__line");
+      const activeSlides = this.sliderState.sliders.slice(this.sliderState.currentItemID, this.sliderState.currentItemID + 3);
+      activeSlides.forEach((s) => {
+        this.sliderState.currentItemUrl = s.url;
+        const currentItem = document.getElementById(this.sliderState.currentItemUrl);
+        currentItem.classList.remove("hideSlide");
+      })
       this.sliderState.position += 467;
-      this.sliderState.currentItem -= 1;
+      this.sliderState.currentItemID -= 1;
 
       line.style.transform = `translate(${this.sliderState.position}px)`;
       line.style.transitionDuration = "0.5s";
@@ -80,7 +85,7 @@ export default {
     carouselNext() {
       const line = document.querySelector(".carousel__line");
       this.sliderState.position -= 467;
-      this.sliderState.currentItem += 1;
+      this.sliderState.currentItemID += 1;
 
       line.style.transform = `translate(${this.sliderState.position}px)`;
       line.style.transitionDuration = "0.5s";
@@ -93,8 +98,8 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import "~@/assets/main.sass"
+<style lang="sass">
+@import "~@/assets/styles/main.sass"
 
 .events-wrapper
   padding: 100px 0
@@ -110,6 +115,8 @@ export default {
     padding: 25px 75px 25px 55px
     color: $color-white
     border: 2px solid #EFF0F6
+    &:before
+      background-image: url("~@/assets/img/arrow-white.svg")
     &:hover
       background-color: #EFF0F6
       color: $events-bg
@@ -291,4 +298,7 @@ export default {
 
 .hideSlide
   opacity: 0.5
+
+.active-slide
+  opacity: 1
 </style>

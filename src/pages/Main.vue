@@ -30,7 +30,7 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 
 .container-wrapper
   overflow: hidden

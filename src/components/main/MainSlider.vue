@@ -58,8 +58,8 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import "~@/assets/main.sass"
+<style lang="sass">
+@import "~@/assets/styles/main.sass"
 
 .slider
   position: relative
@@ -97,15 +97,14 @@ export default {
   width: 200px
   color: $color-purple
   line-height: 15px
-  background-color: white
-  border: 3px solid $color-purple
+  border: 3px solid $color-purple !important
+  &:before
+    background-image: url("~@/assets/img/arrow.svg")
   &:hover
     color: white
     background-color: $color-purple
     &:before
       background-image: url("~@/assets/img/arrow-white.svg")
-  &:before
-    background-image: url("~@/assets/img/arrows.svg")
 
 .slider-nav
   display: flex

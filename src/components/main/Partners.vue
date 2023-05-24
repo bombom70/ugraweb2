@@ -41,8 +41,8 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import "~@/assets/main.sass"
+<style lang="sass">
+@import "~@/assets/styles/main.sass"
 
 .partners-wrapper
   padding: 100px 0 200px 0

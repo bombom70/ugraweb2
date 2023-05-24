@@ -78,8 +78,8 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
-@import "~@/assets/main.sass"
+<style lang="sass">
+@import "~@/assets/styles/main.sass"
 
 .news-wrapper
   background-color: #EFF0F6
@@ -95,6 +95,8 @@ export default {
 .btn_news
   background-color: $color-gray
   color: $color-white
+  &:before
+    background-image: url("~@/assets/img/arrow-white.svg")
   &:hover
     background-color: $color-light-gray
 
