@@ -16,7 +16,7 @@ export default {
     getContentTotag() {
       this.fetchNewsToTag(this.name)
     }
-  },
+  }
 }
 </script>
 

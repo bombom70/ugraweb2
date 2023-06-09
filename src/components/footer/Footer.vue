@@ -101,7 +101,7 @@ export default {
 </script>
 
 <style lang="sass">
-@import "~@/assets/styles/main.sass"
+@import ~@/assets/styles/main.sass
 
 .footer-wrapper
   position: relative

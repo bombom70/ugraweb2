@@ -124,4 +124,7 @@ export default {
 .container-sub-links
   padding-left: 340px
 
+@media (max-width: 1400px)
+  .menu-wrapper
+    display: none
 </style>

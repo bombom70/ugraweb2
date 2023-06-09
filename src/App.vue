@@ -1,28 +1,30 @@
 <template>
   <div class="App">
-    <v-header/>
-    <router-view></router-view>
-    <v-footer/>
+    hello
+    {{ counter }}
+    <button @click="inc">Plus one</button>
   </div>
 </template>
 
 <script>
-import Header from "@/components/header/Header.vue";
-import Footer from "@/components/footer/Footer.vue";
 export default {
   name: 'App',
-  components: {
-    "v-header": Header,
-    "v-footer": Footer
+  data() {
+    return {
+      counter: 0
+    }
   },
+  methods: {
+    inc() {
+      this.counter++;
+    }
+  }
 }
 </script>
 
 <style lang="sass">
-@import "~@/assets/styles/main.sass"
-
 .App
-  display: flex
-  flex-direction: column
-  justify-content: space-between
+  width: 500px
+  padding: 32px
+  margin: 0 auto
 </style>

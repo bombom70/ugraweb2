@@ -4,13 +4,6 @@
       <div class="news__search container">
         <h1 class="title">Новости</h1>
         <newsSearchForm />
-        <div class="category">
-          <CategoryNewsItem
-            v-for="categoryItem in getCategory"
-            :key="categoryItem.id"
-            :name="categoryItem.name"
-          />
-        </div>
       </div>
     </div>
     <div class="news-wrapper_content">
@@ -34,7 +27,6 @@
 import {mapActions, mapGetters} from "vuex";
 import { DOMAIN_URL } from "@/constants";
 import newsCard from "@/components/newsCard/NewsCard.vue"
-import CategoryNewsItem from "@/components/category/CategoryNewsItem.vue"
 import newsSearchForm from "@/components/forms/newsSearchForm.vue"
 
 export default {
@@ -44,9 +36,9 @@ export default {
       url: DOMAIN_URL
     }
   },
-  components: { newsCard, CategoryNewsItem, newsSearchForm },
+  components: { newsCard, newsSearchForm },
   computed: {
-    ...mapGetters(["getAllNews", "getCategory"]),
+    ...mapGetters(["getAllNews"]),
   },
   methods: {
     ...mapActions(["fetchAllNews"]),
@@ -66,12 +58,10 @@ export default {
   padding-bottom: 50px
 
 .news-wrapper_content
-  padding-top: 70px
+  padding: 70px 0
   background-color: #EFF0F6
 
-.category
-  display: flex
-  flex-wrap: wrap
-  gap: 20px
-  margin-top: 50px
+@media (max-width: 1400px)
+  .news-wrapper_header
+    padding-bottom: 30px
 </style>

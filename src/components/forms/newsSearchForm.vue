@@ -8,13 +8,17 @@
         </svg>
       </button>
     </div>
-    <input class="news__submit" type="submit" value="Подписаться на обновления"/>
+    <CategoryNewsList/>
+    <a class="news__submit">Подписаться на обновления</a>
   </form>
 </template>
 
 <script>
+import CategoryNewsList from "@/components/category/CategoryNewsList.vue";
+
 export default {
   name: "newsSearchForm",
+  components: { CategoryNewsList },
   data() {
     return {
       inputValue: '',
@@ -36,10 +40,11 @@ export default {
   display: flex
   gap: 60px
   align-items: end
+  flex-wrap: wrap
 
 .news-input-wrapper
   position: relative
-  width: 100%
+  flex: 1 1 auto
   max-width: 1025px
 
 .news__input
@@ -81,4 +86,17 @@ export default {
   background: none
   border: none
   cursor: pointer
+
+@media (max-width: 1400px)
+  .news__form
+    gap: 30px
+  .news-input-wrapper
+    max-width: initial
+
+  .news__submit
+    flex: 1 1 auto
+    background-color: $color-blue
+    color: $color-white
+    text-align: center
+    order: 3
 </style>

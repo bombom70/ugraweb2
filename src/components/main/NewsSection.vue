@@ -201,5 +201,7 @@ export default {
     border-radius: 45px 0 0 45px
     padding: 0 10px 0 20px
 
-
+@media (max-width: 1400px)
+  .news__item
+    max-width: 354px
 </style>

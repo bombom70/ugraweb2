@@ -11,6 +11,7 @@
           <div class="logo" v-html="icon.icon"></div>
         </a>
         <v-menu/>
+        <burger-menu/>
       </div>
     </div>
   </div>
@@ -19,9 +20,11 @@
 <script>
 import Menu from "@/components/header/Menu.vue";
 import axios from "axios";
+import BurgerMenu from "@/components/header/BurgerMenu.vue";
 export default {
   name: "Header",
   components: {
+    BurgerMenu,
     "v-menu": Menu
   },
   data() {
@@ -52,6 +55,7 @@ export default {
   z-index: 100
 
 .header
+  position: relative
   display: flex
   gap: 80px
 
