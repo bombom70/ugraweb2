@@ -3,12 +3,15 @@ import axios from "axios";
 export const newsPageModule = {
     state: {
         data: [],
+        currentNews: null
     },
     mutations: {
         addData(state, payload) {
             state.data = payload;
-        }
-
+        },
+        setCerrentNews(state, payload) {
+            state.currentNews = payload;
+        },
     },
     actions: {
         fetchAllNews({ commit }) {
@@ -18,6 +21,10 @@ export const newsPageModule = {
         fetchNewsToTag({ commit }, tag) {
             axios(`https://rmc.uwdev.ru/api/news?tag=${tag}`)
                 .then(({data}) => commit("addData", data));
+        },
+        fetchCurrentNews({ commit }, id) {
+            axios(`https://rmc.uwdev.ru/api/news/${id}`)
+                .then(({data}) => commit("setCerrentNews", data));
         },
     },
     getters: {
@@ -32,6 +39,9 @@ export const newsPageModule = {
         },
         getPageNavigation(state) {
             return state.data.pageNav;
+        },
+        getCerrentNews(state) {
+            return state.currentNews;
         },
     },
 }

@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from "vue-router";
 import News from "@/pages/News.vue";
 import Main from "@/pages/Main.vue";
+import NewsItem from "@/pages/NewsItem.vue";
 
 const routes = [
     {
@@ -10,6 +11,10 @@ const routes = [
     {
         path: "/news",
         component: News,
+    },
+    {
+        path: "/news/:id",
+        component: NewsItem,
     }
 ];
 
